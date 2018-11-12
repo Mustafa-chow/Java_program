@@ -1,0 +1,127 @@
+
+//======================================================================
+//
+// Title:      Money Monarchs
+// Course:     CSC 3020
+// Homework:   Homework 2
+// Author:     Mustafa Chowdhury, ge3306
+// Date:       02/06/2018
+// Description:
+//   application that converts between currencies US Dollar ($), Euro (€), and Japanese Yen (¥).  
+//	Prompt the user for a conversion code to convert the currency
+//
+//======================================================================
+
+
+package Money_monarchs;
+
+//import classes
+import java.util.Scanner;
+
+//===========================================================
+//class Money_monarchs
+//===========================================================
+
+public class Money_monarchs {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner keyboard = new Scanner(System.in);
+		
+		final String y = "\u00A5";
+		final String d = "\u0024";
+		final String e = "\u20AC";
+		System.out.println("Welcome to the Money Monachers\n-------------------------------");
+		
+		System.out.println("\n[Press a] US Dollar -> Euro"
+				+ "\n[Press b] US Dollar -> Japanese Yen"
+				+ "\n[Press c] Euro -> US Dollar"
+				+ "\n[Press d] Euro -> Japanese Yen"
+				+ "\n[Press e] Japanese Yen -> US Dollar"
+				+ "\n[Press f] Japanese Yen -> Euro"
+				+ "\n[Press x] Exit\n");
+	
+		
+		while(true)
+		{
+			System.out.println("\n\nPlease choose an option: ");
+			char n = keyboard.next().charAt(0);
+			switch(n) 
+			{
+			
+			case 'a':
+				System.out.print("Enter US dollar that you want to convert into Euro: \n");
+				double us_dollar = keyboard.nextDouble();
+				
+				final double euro = 0.81;
+				double converted_euro = us_dollar * euro;
+				
+				//System.out.printf("\nUS Dollar: \t$%2.2f %n%s€%1.2f%n",us_dollar,"Euro: \t\t", converted_euro);
+				System.out.printf("%n%s%1.2f %s %1.2f",d,us_dollar, "converted into e", converted_euro);
+				break;
+				
+			case 'b':
+				System.out.print("Enter US dollar that you want to convert into Japannese Yen: ");
+				double us_dollar1 = keyboard.nextDouble();
+				
+				final double yen = 108.68;
+				double converted_yen = us_dollar1 * yen;
+				
+				//System.out.printf("US Dollar: \t$%2.2f %n%s¥%2.2f",us_dollar1,"Euro: \t\t", converted_yen);
+				System.out.printf("%n$%1.2f %s ¥%1.2f",us_dollar1, "converted into", converted_yen);
+				break;
+				
+			case 'c':
+				System.out.print("Enter Euro that you want to convert into US Dollar: ");
+				double euro1 = keyboard.nextDouble();
+				
+				final double us_dollar2 = 1.24;
+				double converted_dollar = us_dollar2 * euro1;
+				
+				//System.out.printf("Euro: \t\t€%2.2f %n%s$%2.2f",euro1,"US Dollar: \t", converted_dollar);
+				System.out.printf("%n€%1.2f %s $%1.2f",euro1, "converted into", converted_dollar);
+				break;
+				
+			case 'd':
+				System.out.print("Enter Euro that you want to convert into Japanese Yen: ");
+				double euro2 = keyboard.nextDouble();
+				
+				final double yen1 = 134.28;
+				double converted_yen1 = yen1 * euro2;
+				
+				//System.out.printf("Euro: \t\t€%2.2f %n%s¥%2.2f",euro2,"Japanase Yen: \t", converted_yen1);
+				System.out.printf("%n€%1.2f %s ¥%1.2f",euro2, "converted into", converted_yen1);
+				break;
+				
+			case 'e':
+				System.out.print("Enter Japanese Yen that you want to convert into US Dollar: ");
+				double yenn = keyboard.nextDouble();
+				
+				final double dollars = 0.0092;
+				double converted_dollars = yenn * dollars;
+				
+				//System.out.printf("Japanase Yen: \t¥%2.2f %n%s$%2.2f",yenn,"US Dollar: \t", converted_dollars);
+				System.out.printf("%n¥%1.2f %s $%1.2f",yenn, "converted into", converted_dollars);
+				break;
+			
+			case 'f':
+				System.out.print("Enter Japanese Yen that you want to convert into Euro: ");
+				double yennn = keyboard.nextDouble();
+				
+				final double euros = 0.0074;
+				double converted_euros = yennn * euros;
+				
+				//System.out.printf("Japanase Yen: \t¥%2.2f %n%s€%2.2f",yennn,"Euro: \t\t", converted_euros);
+				System.out.printf("%n¥%1.2f %s €%1.2f",yennn, "converted into", converted_euros);
+			
+			case 'x':
+				keyboard.close();
+				System.out.println("Exiting.........");
+				return;
+				
+			}
+		}
+		
+	}
+
+}

@@ -1,0 +1,151 @@
+package HW5;
+
+public class Product {
+	
+	// static variable
+	private static int productCount = 0;
+	private static double inventoryValue = 0;
+	private static int inventoryCount = 0;
+	
+	//instance variable
+	private int code;
+	private String name;
+	private double cost;
+	private int count;
+	
+	//default constructor
+	Product()
+	{
+		productCount = productCount+1;
+		code = -1;
+		name = "(not set)";
+		cost = -1;
+		count = -1;
+	}
+	
+	// constructor with parameter
+	Product(int code, String name, double cost, int count)
+	{
+		this.code = code;
+		this.name = name;
+		this.cost = cost;
+		this.count = count;
+		productCount = productCount+1;
+		inventoryValue = inventoryValue + (cost*count);
+		inventoryCount = inventoryCount + count;
+	}
+	
+	// all set methods implemented in below:
+	
+	public static void setProductCount(int pCount)
+	{
+		if (productCount>0)
+		{
+			productCount = pCount;
+		}
+		else
+			throw new IllegalArgumentException("product count is a positive number");
+	}
+	
+	public static void setInventoryValue(double iValue)
+	{
+		if (iValue>0)
+		{
+			inventoryValue = iValue;
+		}
+		else
+			throw new IllegalArgumentException("product count is a positive number");
+	}
+	
+	public static void setInventoryCount(int iCount)
+	{
+		if (iCount>0)
+		{
+			inventoryCount = iCount;
+		}
+		else
+			throw new IllegalArgumentException("product count is a positive number");
+	}
+	
+	public void setCode(int code)
+	{
+		if (code>=0)
+			this.code = code;
+		else
+			throw new IllegalArgumentException("product count is a positive number");
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	public void setCost (double cost)
+	{
+		if (cost>0)
+			this.cost = cost;
+		else
+			throw new IllegalArgumentException("product count is a positive number");
+	}
+	
+	public void setCount(int count)
+	{
+		if (count>0)
+			this.count = count;
+		else
+			throw new IllegalArgumentException("product count is a positive number");
+	}
+	
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	// all the getter methods are in below:
+	
+	public static int getProductCount()
+	{
+		return productCount;
+	}
+	
+	public static double getInventoryValue()
+	{
+		return inventoryValue;
+	}
+	
+	public static int getInventoryCount()
+	{
+		return inventoryCount;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public double getCost()
+	{
+		return cost;
+	}
+	
+	public int getCode()
+	{
+		return code;
+	}
+	
+	public int getCount()
+	{
+		return count;
+	}
+	
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	
+	public boolean equals (Product obj)
+    {
+        return (this.getCode() == obj.getCode());
+    }
+	
+	public String toString()
+	{
+		return String.format("%d %13s %13.2f %13d", getCode(), getName(), getCost(), getCount());
+	}
+	
+	 
+	
+}

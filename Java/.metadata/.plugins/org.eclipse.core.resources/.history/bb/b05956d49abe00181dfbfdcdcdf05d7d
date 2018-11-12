@@ -1,0 +1,64 @@
+package DFA;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class DFA {
+	
+	static int pos_for_one;
+	static int total_zero;
+	
+	public static void main (String... args) throws IOException 
+	{
+		FileReader file_read=new FileReader("Input.txt");
+		BufferedReader buffer_read = new BufferedReader(file_read);
+		String line;
+		while ((line = buffer_read.readLine()) != null)
+		{
+			int length = line.length();
+			boolean found = false;
+
+			// if the the last charcter of the string is one, then not accepted
+			if (line.charAt(length - 1) == '1')
+				found = false;
+			else
+			{
+				
+				for (int i = 0; i<length; i++)
+				{
+					char ch = line.charAt(i);
+					
+					// if found one in the string than it will store
+					// the what position the 1 at
+					// after that from the I assume rest of the string is 0 by 
+					// substracting length and the pos at 1 is and break the loop
+					if (ch == '1')
+					{
+						pos_for_one = i;
+						total_zero = length - pos_for_one;
+						break;
+					}
+				}
+				
+				// accept if there is even # of 0's
+				// including one the length should 
+				if (line.charAt(pos_for_one) == '1' && total_zero%2 != 0)
+				{
+					found = true;
+				}
+			
+			}
+			
+			if (found == true)
+				System.out.println(line+": is accepted\n");
+			else
+				System.out.println(line+": is not accepted\n");
+		}
+		buffer_read.close();
+	    file_read.close();
+	}
+	
+
+}

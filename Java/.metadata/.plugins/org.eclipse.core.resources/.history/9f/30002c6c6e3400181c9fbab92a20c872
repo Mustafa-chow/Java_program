@@ -1,0 +1,145 @@
+package HW5;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class HW5 {
+
+	
+	public static final String FILE_NAME = "ProductInventoryIn.txt";
+	static int dataCount = 0;
+	
+	public static void showMenu()
+	{
+		System.out.println("\nCamping Critters Menu\n");
+		System.out.println("1 - Sell product");
+		System.out.println("2 - Order product");
+		System.out.println("3 - List product inventory");
+		System.out.println("4 - Exit");
+		
+		System.out.print("\nEnter an option: ");
+		
+	}
+	
+	public static void readFile(Product obj[]) throws NumberFormatException, IOException
+	{
+		// read the file
+		FileReader file_read=new FileReader(FILE_NAME);
+	    BufferedReader buffer_read=new BufferedReader(file_read);
+	    String line;
+	   
+	    
+	    // using loops to store data into object's array
+	    while ((line=buffer_read.readLine())!=null) {
+	      
+
+	        obj[dataCount] = new Product(Integer.parseInt(line.substring(0,5).trim()), 
+	        								line.substring(7,20).trim(),
+	        								Double.parseDouble(line.substring(35,42).trim()),
+	        								Integer.parseInt(line.substring(49,51).trim()));
+
+
+	        dataCount = dataCount + 1;
+	    }
+	    buffer_read.close();
+	    file_read.close();
+
+	 // Show number of lines read
+	    System.out.println(dataCount + " data line(s) " +
+              "read from file '" + FILE_NAME + "'.");
+	}
+	
+	public static void sellProduct(Product obj[])
+	{
+		Scanner keyboard = new Scanner(System.in);
+		int i;
+		int p_code;
+		// validating product code
+		System.out.print("Please enter the product code: ");
+		p_code = keyboard.nextInt();
+		
+		int idx = -1;
+		for (i = 0; i<obj.length && idx == -1; i++)
+		{
+			if (p_code == obj[i].getCode())
+			{
+				idx = i;
+			}
+		}
+		
+		
+		if (idx == -1)
+		{
+			System.out.println("The code doesn't match with the inventory");
+		}
+		else
+		{
+			int quantity;
+			int j;
+			boolean found = true;
+			// validating product quantity
+			System.out.print("Please enter the quantity of the product you want to sell: ");
+			
+			quantity = keyboard.nextInt();
+			while((quantity < 1) ||  (quantity > obj[j].getCount() ) )
+			{
+				System.out.print("Please enter the quantity of the product you want to sell: ");
+				quantity = keyboard.nextInt();
+				for (j = 0; j<obj.length; j++)
+				{
+					if (quantity <= obj[j].getCount())
+					{
+						break;
+					}
+					else if (quantity > obj[j].getCount())
+					{
+						found = false;
+					}
+					
+				}
+				if (found == false)
+					System.out.println("Enter a quantity in the ragne betwwen 1 to " + obj[idx].getCount());
+				
+			}
+		}
+		
+		
+		
+		
+	
+		
+		keyboard.close();
+	}
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		
+		// creating keyboard
+		Scanner keyboard = new Scanner(System.in);
+		
+		// declaring an object of class Product
+		Product[] products = new Product[10];
+		
+	
+
+      
+		readFile(products);
+		showMenu();
+		int option = keyboard.nextInt();
+		switch(option)
+		{
+		case 1:
+			sellProduct(products);
+		}
+		
+	}
+
+}
+
+//for(int i=0 ; i< products.length; i++) {
+//System.out.println(products[i].getCode()+"\t" +products[i].getName()+"\t\t"+ products[i].getCost()
+//		+"\t\t" +products[i].getCount());
+//}

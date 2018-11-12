@@ -1,0 +1,64 @@
+package DFA;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+
+public class DFA {
+	static int pos_for_one;
+	static int total_zero;
+	
+	public static void main (String... args) throws IOException
+	{
+		FileReader file_read=new FileReader("Input.txt");
+		@SuppressWarnings("resource")
+		BufferedReader buffer_read = new BufferedReader(file_read);
+		String a;
+		while ((a = buffer_read.readLine()) != null)
+		{
+			int length = a.length();
+			
+			boolean found = false;
+			
+			for (int i = 0; i<length; i++)
+			{
+				char ch = a.charAt(i);
+				if (ch == '1')
+				{
+					pos_for_one = i;
+					// checking for if 1 is more than one times
+					int second_pos_one = a.indexOf('1', pos_for_one + 1);
+				
+					// if there is no more than one after first one
+					if (second_pos_one == -1)
+					{
+						total_zero = length - pos_for_one;
+						break;
+					}
+					else
+					{
+						found = false;
+						break;
+					}
+
+				}
+				
+					
+			}
+			
+			if (a.charAt(pos_for_one) == '1' && total_zero%2 != 0)
+			{
+				found = true;
+			}
+				
+				
+			if (found == true)
+				System.out.println(a+": is accepted\n");
+			else
+				System.out.println(a+": is not accepted");
+		}
+	}
+
+}

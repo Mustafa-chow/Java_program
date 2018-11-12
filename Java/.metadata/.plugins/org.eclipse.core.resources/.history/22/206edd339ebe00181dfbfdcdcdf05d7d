@@ -1,0 +1,63 @@
+package DFA;
+
+import java.util.Scanner;
+
+
+public class DFA {
+	static int pos_for_one;
+	static int total_zero;
+	
+	public static void main (String... args)
+	{
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("Enter a String: ");
+		String a = keyboard.nextLine();
+		
+		int length = a.length();
+		
+		boolean found = false;
+		
+		if (a.charAt(length-1) == '1')
+			found = false;
+		else
+		{
+			
+			for (int i = 0; i<length; i++)
+			{
+				char ch = a.charAt(i);
+				if (ch == '1')
+				{
+					pos_for_one = i;
+					int second_pos_one = a.indexOf('1', pos_for_one+1);
+					System.out.println("Second pos: "+se);
+					if (second_pos_one == -1)
+					{
+						total_zero = length - pos_for_one;
+						break;
+					}
+					else
+					{
+						total_zero = length - second_pos_one;
+						break;
+					}
+						
+					
+				}
+				
+					
+			}
+			
+			if (a.charAt(pos_for_one) == '1' && total_zero%2 != 0)
+			{
+				found = true;
+			}
+			
+		}	
+		if (found == true)
+			System.out.println(a+": is accepted");
+		else
+			System.out.println(a+": is not accepted");
+		
+	}
+
+}
